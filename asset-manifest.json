@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/kliptest/static/css/main.a617e044.chunk.css",
+    "main.js": "/kliptest/static/js/main.309b311c.chunk.js",
+    "main.js.map": "/kliptest/static/js/main.309b311c.chunk.js.map",
+    "runtime-main.js": "/kliptest/static/js/runtime-main.877425df.js",
+    "runtime-main.js.map": "/kliptest/static/js/runtime-main.877425df.js.map",
+    "static/js/2.ede5bc56.chunk.js": "/kliptest/static/js/2.ede5bc56.chunk.js",
+    "static/js/2.ede5bc56.chunk.js.map": "/kliptest/static/js/2.ede5bc56.chunk.js.map",
+    "static/js/3.c9f5d7fe.chunk.js": "/kliptest/static/js/3.c9f5d7fe.chunk.js",
+    "static/js/3.c9f5d7fe.chunk.js.map": "/kliptest/static/js/3.c9f5d7fe.chunk.js.map",
+    "index.html": "/kliptest/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/kliptest/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.ede5bc56.chunk.js.LICENSE.txt": "/kliptest/static/js/2.ede5bc56.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/kliptest/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.877425df.js",
+    "static/js/2.ede5bc56.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.309b311c.chunk.js"
+  ]
+}
