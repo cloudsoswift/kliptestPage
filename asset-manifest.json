@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/kliptestPage/static/css/main.a617e044.chunk.css",
-    "main.js": "/kliptestPage/static/js/main.e9926f45.chunk.js",
-    "main.js.map": "/kliptestPage/static/js/main.e9926f45.chunk.js.map",
+    "main.js": "/kliptestPage/static/js/main.a9f95058.chunk.js",
+    "main.js.map": "/kliptestPage/static/js/main.a9f95058.chunk.js.map",
     "runtime-main.js": "/kliptestPage/static/js/runtime-main.4811f46e.js",
     "runtime-main.js.map": "/kliptestPage/static/js/runtime-main.4811f46e.js.map",
-    "static/js/2.b3245c58.chunk.js": "/kliptestPage/static/js/2.b3245c58.chunk.js",
-    "static/js/2.b3245c58.chunk.js.map": "/kliptestPage/static/js/2.b3245c58.chunk.js.map",
+    "static/js/2.0b696a9d.chunk.js": "/kliptestPage/static/js/2.0b696a9d.chunk.js",
+    "static/js/2.0b696a9d.chunk.js.map": "/kliptestPage/static/js/2.0b696a9d.chunk.js.map",
     "static/js/3.c9f5d7fe.chunk.js": "/kliptestPage/static/js/3.c9f5d7fe.chunk.js",
     "static/js/3.c9f5d7fe.chunk.js.map": "/kliptestPage/static/js/3.c9f5d7fe.chunk.js.map",
     "index.html": "/kliptestPage/index.html",
     "static/css/main.a617e044.chunk.css.map": "/kliptestPage/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.b3245c58.chunk.js.LICENSE.txt": "/kliptestPage/static/js/2.b3245c58.chunk.js.LICENSE.txt",
+    "static/js/2.0b696a9d.chunk.js.LICENSE.txt": "/kliptestPage/static/js/2.0b696a9d.chunk.js.LICENSE.txt",
     "static/media/logo.6ce24c58.svg": "/kliptestPage/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.4811f46e.js",
-    "static/js/2.b3245c58.chunk.js",
+    "static/js/2.0b696a9d.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.e9926f45.chunk.js"
+    "static/js/main.a9f95058.chunk.js"
   ]
 }
