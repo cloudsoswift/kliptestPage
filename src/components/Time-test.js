@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 function TimeTest() {
     let [isDday, setIsDday] = useState(false); //디데이 이후면 true, 이전이면 false
     var minting_day = new Date(2021,12,7,15,26,0); //일단 임의의 값 넣었음,  할때 원하는 달 -1 해야한데영
-    var [nowDate, setNowDate] = useState(new Date()); //현재 시간
+    //var [nowDate, setNowDate] = useState(new Date()); //현재 시간
     
-    let [day, changeDay] = useState("0");
-    let [hour, changeHour] = useState("00");
-    let [min, changeMin] = useState("00");
-    let [sec, changeSec] = useState("00");
-    let [nftAmount, changeNftAmount] = useState(0);
+    //let [day, changeDay] = useState("0");
+    //let [hour, changeHour] = useState("00");
+    //let [min, changeMin] = useState("00");
+    //let [sec, changeSec] = useState("00");
+    //let [nftAmount, changeNftAmount] = useState(0);
 
     const TimeTest = () => {
         var xmlHttp;
@@ -27,7 +27,7 @@ function TimeTest() {
     });*/
     const [count, setCount] = useState(0);
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    //const [selectedDate, setSelectedDate] = useState(new Date());
     const savedCallback = useRef();
 
     const callback = () => {
@@ -67,7 +67,6 @@ function TimeTest() {
       <span>{String(minting_day)}</span><br/>
       <span>{JSON.stringify(timeLeft(minting_day-currentDate))}</span><br/>
       <input type="datetime-local"></input><br/>
-      <span>{String(selectedDate)}</span><br/>
     </div>
   );
 }

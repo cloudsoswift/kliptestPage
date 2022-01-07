@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { prepare, request, getResult, getCardList } from 'klip-sdk'
+import React, { useState } from 'react';
+import { prepare, request, getResult } from 'klip-sdk'
 function KlipTest() {
-  let request_key = null
   const [address, setAddress] = useState(null);
   const [result, setResult] = useState(null); 
   const prepare_auth  = async () => {
