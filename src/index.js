@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import KlipTest from './components/Klip-test';
+import TimeTest from './components/Time-test';
 
 const routing = (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
-      <Route path="/" element={<KlipTest />}/>
+      <Route exact path="/" element={<KlipTest />}/>
+      <Route path="/timeTest" element={<TimeTest />}/>
     </Routes>
   </BrowserRouter>
 );
