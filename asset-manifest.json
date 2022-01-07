@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/kliptestPage/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/kliptestPage/static/js/main.b5d7fad9.chunk.js",
-    "main.js.map": "/kliptestPage/static/js/main.b5d7fad9.chunk.js.map",
+    "main.js": "/kliptestPage/static/js/main.3252255f.chunk.js",
+    "main.js.map": "/kliptestPage/static/js/main.3252255f.chunk.js.map",
     "runtime-main.js": "/kliptestPage/static/js/runtime-main.9e226868.js",
     "runtime-main.js.map": "/kliptestPage/static/js/runtime-main.9e226868.js.map",
     "static/js/2.2e7832c2.chunk.js": "/kliptestPage/static/js/2.2e7832c2.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9e226868.js",
     "static/js/2.2e7832c2.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.b5d7fad9.chunk.js"
+    "static/js/main.3252255f.chunk.js"
   ]
 }
