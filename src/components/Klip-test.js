@@ -59,6 +59,7 @@ function KlipTest() {
           alert("req: "+req)
           request(req, ()=> alert('모바일 환경에서 실행하세요.'))
           setRequestKey(req)
+          setReady(true)
         }}>Auth 버튼</button>
         {
           ready ? (<button onClick={
