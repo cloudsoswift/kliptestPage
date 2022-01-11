@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { prepare, request, getResult } from 'klip-sdk'
+import axios from 'axios';
 function KlipTest() {
   const [address, setAddress] = useState(null);
   const [result, setResult] = useState(null); 
@@ -66,9 +67,7 @@ function KlipTest() {
             async()=>{
             const real_res = await getResult(requestKey)
             alert("AUTH real result: "+JSON.stringify(real_res))
-            alert("주소:" + real_res.result.klaytn_address)
             setAddress(real_res.result.klaytn_address)
-            alert("상태:" + real_res.status)
             setResult(real_res.result.status)
           }}>확인</button>) : (<span/>)
         }
@@ -93,6 +92,28 @@ function KlipTest() {
           const res = await getResult(req)
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
         }}>ExecuteContract 버튼</button><br/>
+        <button onClick={async()=>{
+          const res = await axios.post('https://a2a-api.klipwallet.com/v2/a2a/prepare',{
+            bapp: {
+              name: "My BApp",
+            },
+            type: "auth"
+          })
+          const link = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key="+res.data.request_key
+          window.location.assign(link)
+          let timerId = setInterval(() => {
+            axios
+              .get(
+                `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${res.data.request_key}`
+              )
+              .then((res) => {
+                if (res.data.result) {
+                  console.log(`[Result] ${JSON.stringify(res.data.result)}`);
+                  clearInterval(timerId);
+                }
+              });
+          }, 1000);
+        }}>TEST</button>
     </div>
   );
 }
