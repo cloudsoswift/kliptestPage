@@ -1,74 +1,35 @@
 import React, { useState } from 'react';
-import { prepare, request, getResult } from 'klip-sdk'
+import Klip from '../api/Klip';
+import { request, getResult } from 'klip-sdk';
 import axios from 'axios';
+import config from '../config';
 function KlipTest() {
   const [address, setAddress] = useState(null);
   const [result, setResult] = useState(null); 
-  const [ready, setReady] = useState(false);
+  const [ready_auth, setReady_auth] = useState(false);
   const [requestKey, setRequestKey] = useState(null);
-  const prepare_auth  = async () => {
-      const bappName = 'Test BApp'
-      const successLink = 'https://www.naver.com'
-      const failLink = ''
-      let _request_key = null
-      const res = await prepare.auth({ bappName, successLink, failLink }) 
-      if(res.err){
-          alert("Auth_Error Occured! : " + res.err)
-      } else if (res.request_key){
-          _request_key = res.request_key
-      }
-      return _request_key
-  }
-  const prepare_sendKlay = async () => {
-      const bappName = 'Test BApp'
-      const from = ''
-      const to = '0x75f58bc747972aa0f4fd189c0045510e178b8e2c'
-      const amount = '1'
-      const successLink = ''
-      const failLink = ''
-      let _request_key = null
-      const res = await prepare.sendKLAY({ bappName, from, to, amount, successLink, failLink })
-      if (res.err) {
-          console.error("SendKlay_Error Occured! : " + res.err)
-      } else if (res.request_key){
-          _request_key = res.request_key
-      }
-      return _request_key
-  }
-  const prepare_executeContract = async () => {
-      const bappName = 'Test BApp'
-      const from = ''
-      const to = '0x3ac6f8700f2610fc72261d3dc225d8e47748dfae'
-      const value = '0'
-      const abi = "{\"constant\": true,\"inputs\": [{\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"name\": \"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}"
-      const params = "[\"1\"]"
-      const successLink = ''
-      const failLink = ''
-      let _request_key = null
-      const res = await prepare.executeContract({ bappName, from, to, value, abi, params, successLink, failLink })
-      if (res.err) {
-        alert("executeContract_Error Occured! : " + res.err)
-      } else if (res.request_key) {
-        _request_key = res.request_key
-      }
-      return _request_key
-  }
+  const klip_obj = new Klip()
   return (
     <div>
         <button onClick={async()=>{
-          const req = await prepare_auth()
+          const req = await klip_obj.prepare_auth()
           alert("req: "+req)
           request(req, ()=> alert('모바일 환경에서 실행하세요.'))
           setRequestKey(req)
-          setReady(true)
+          setReady_auth(true)
         }}>Auth 버튼</button>
         {
-          ready ? (<button onClick={
+          ready_auth ? (<button onClick={
             async()=>{
             const real_res = await getResult(requestKey)
             alert("AUTH real result: "+JSON.stringify(real_res))
-            setAddress(real_res.result.klaytn_address)
-            setResult(real_res.result.status)
+            if(real_res.status === "prepared"){
+              alert("Error Occured! 다시 인증해주세요.")
+            }else{
+              setAddress(real_res.result.klaytn_address)
+              setResult(real_res.result.status)
+            }
+            setReady_auth(false);
           }}>확인</button>) : (<span/>)
         }
         {
@@ -79,7 +40,7 @@ function KlipTest() {
         }
         <br/>
         <button onClick={async()=>{
-          const req = await prepare_sendKlay()
+          const req = await klip_obj.prepare_sendKlay(config.testAddress, '1')
           alert(req)
           request(req, ()=> alert('모바일 환경에서 실행하세요.'))
           setTimeout(()=>null, 5000)
@@ -87,18 +48,13 @@ function KlipTest() {
           alert("SEND KLAY real result: "+JSON.stringify(res))
         }}>SendKlay 버튼</button><br/>
         <button onClick={async()=>{
-          const req = await prepare_executeContract()
+          const req = await klip_obj.prepare_executeContract()
           request(req, ()=> alert('모바일 환경에서 실행하세요.'))
           const res = await getResult(req)
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
         }}>ExecuteContract 버튼</button><br/>
         <button onClick={async()=>{
-          const res = await axios.post('https://a2a-api.klipwallet.com/v2/a2a/prepare',{
-            bapp: {
-              name: "My BApp",
-            },
-            type: "auth"
-          })
+          const res = klip_obj.prepare_auth_axios()
           const link = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key="+res.data.request_key
           window.location.assign(link)
           let timerId = setInterval(() => {
@@ -115,7 +71,26 @@ function KlipTest() {
               });
           }, 1000);
           timerId();
-        }}>TEST</button>
+        }}>TEST</button><br/>
+        <button onClick={async()=>{
+          const req = await klip_obj.prepare_auth_axios()
+          alert(JSON.stringify(req))
+          request(req.data.request_key, ()=> alert('모바일 환경에서 실행하세요.'))
+          const res = await getResult(req.data.request_key)
+          alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
+        }}>Auth 버튼 (Axios)</button><br/><button onClick={async()=>{
+          const req = await klip_obj.prepare_sendKlay_axios(config.testAddress,'100')
+          alert(req)
+          request(req, ()=> alert('모바일 환경에서 실행하세요.'))
+          const res = await getResult(req)
+          alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
+        }}>SendKlay 버튼 (Axios)</button><br/><button onClick={async()=>{
+          const req = await klip_obj.prepare_executeContract_axios(config.testContractAddress, "{\"constant\": true,\"inputs\": [{\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"name\": \"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}", "[\"1\"]")
+          alert(req)
+          request(req, ()=> alert('모바일 환경에서 실행하세요.'))
+          const res = await getResult(req)
+          alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
+        }}>ExecuteContract 버튼 (Axios)</button><br/>
     </div>
   );
 }
