@@ -109,10 +109,12 @@ function KlipTest() {
               .then((res) => {
                 if (res.data.result) {
                   console.log(`[Result] ${JSON.stringify(res.data.result)}`);
+                  alert(`[Result] ${JSON.stringify(res.data.result)}`);
                   clearInterval(timerId);
                 }
               });
           }, 1000);
+          timerId();
         }}>TEST</button>
     </div>
   );
