@@ -107,14 +107,18 @@ function KlipTest() {
                 if (res.data.result) {
                   console.log(`[Result] ${JSON.stringify(res.data.result)}`);
                   alert(`[Result] ${JSON.stringify(res.data.result)}`);
-                  window.sessionStorage.setItem('walletAddress', res.data.result.klaytn_address)
-                  alert(window.sessionStorage.getItem('walletAddress'))
-                  alert(window.sessionStorage.walletAddress)
+                  if(window.sessionStorage.getItem('walletAddress')===null){
+                    window.sessionStorage.setItem('walletAddress', res.data.result.klaytn_address)
+                  } else{
+                    window.sessionStorage.removeItem('walletAddress')
+                  }
                   clearInterval(timerId);
                 }
               });
           }, 1000);
-        }}>Auth 버튼 ( Axios, sessionStorage에 저장 )</button><br/>
+        }}>{
+          window.sessionStorage.walletAddress ? (<span>로그아웃</span>) : (<span>로그인</span>)
+        }</button><br/>
         {
           window.sessionStorage.walletAddress ? (<span>주소는 {window.sessionStorage.walletAddress}</span>) : (<span/>)
         }
