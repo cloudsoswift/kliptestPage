@@ -57,7 +57,7 @@ function KlipTest() {
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
         }}>ExecuteContract 버튼</button><br/>
         <button onClick={async()=>{
-          const res = klip_obj.prepare_auth_axios()
+          const res = await klip_obj.prepare_auth_axios()
           const link = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key="+res.data.request_key
           window.location.assign(link)
           let timerId = setInterval(() => {
@@ -94,8 +94,8 @@ function KlipTest() {
           const res = await getResult(req)
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
         }}>ExecuteContract 버튼 (Axios)</button><br/>
-        <button onClick={()=>{
-          const res = klip_obj.prepare_auth_axios()
+        <button onClick={async()=>{
+          const res = await klip_obj.prepare_auth_axios()
           const link = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key="+res.data.request_key
           window.location.assign(link)
           let timerId = setInterval(() => {
@@ -112,7 +112,6 @@ function KlipTest() {
                 }
               });
           }, 1000);
-          timerId();
         }}>Auth 버튼 ( Axios, sessionStorage에 저장 )</button><br/>
         {
           window.sessionStorage.walletAddress ? (<span>주소는 {window.sessionStorage.walletAddress}</span>) : (<span/>)
