@@ -68,10 +68,10 @@ export default class Klip{
     }
     prepare_executeContract_axios = async(to, abi, params) => {
         return await axios.post('https://a2a-api.klipwallet.com/v2/a2a/prepare',{
-        "transaction": {
+        transaction: {
             from: "", // optional
             to, // contract address
-            value: "1000000000000000000", // 단위는 peb. 1 KLAY
+            value: "", // 단위는 peb. 1 KLAY
             abi,
             params
             }

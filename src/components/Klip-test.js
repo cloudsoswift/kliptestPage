@@ -28,6 +28,7 @@ function KlipTest() {
             }else{
               setAddress(real_res.result.klaytn_address)
               setResult(real_res.result.status)
+              window.Storage.address = address
             }
             setReady_auth(false);
           }}>확인</button>) : (<span/>)
@@ -48,7 +49,9 @@ function KlipTest() {
           alert("SEND KLAY real result: "+JSON.stringify(res))
         }}>SendKlay 버튼</button><br/>
         <button onClick={async()=>{
-          const req = await klip_obj.prepare_executeContract()
+          const abi = "{\"constant\": true,\"inputs\": [{\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"name\": \"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}"
+          const param = "[\"1\"]"
+          const req = await klip_obj.prepare_executeContract(config.testContractAddress, abi, param)
           request(req, ()=> alert('모바일 환경에서 실행하세요.'))
           const res = await getResult(req)
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
@@ -91,6 +94,29 @@ function KlipTest() {
           const res = await getResult(req)
           alert("EXECUTECONTRACT real result: "+JSON.stringify(res))
         }}>ExecuteContract 버튼 (Axios)</button><br/>
+        <button onClick={()=>{
+          const res = klip_obj.prepare_auth_axios()
+          const link = "kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key="+res.data.request_key
+          window.location.assign(link)
+          let timerId = setInterval(() => {
+            axios
+              .get(
+                `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${res.data.request_key}`
+              )
+              .then((res) => {
+                if (res.data.result) {
+                  console.log(`[Result] ${JSON.stringify(res.data.result)}`);
+                  alert(`[Result] ${JSON.stringify(res.data.result)}`);
+                  window.sessionStorage.setItem('walletAddress', res.data.result.klaytn_address)
+                  clearInterval(timerId);
+                }
+              });
+          }, 1000);
+          timerId();
+        }}>Auth 버튼 ( Axios, sessionStorage에 저장 )</button><br/>
+        {
+          window.sessionStorage.walletAddress ? (<span>주소는 {window.sessionStorage.walletAddress}</span>) : (<span/>)
+        }
     </div>
   );
 }

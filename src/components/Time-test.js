@@ -67,6 +67,9 @@ function TimeTest() {
       <span>{String(minting_day)}</span><br/>
       <span>{JSON.stringify(timeLeft(minting_day-currentDate))}</span><br/>
       <input type="datetime-local"></input><br/>
+      {
+        window.localStorage.address ? (<span>주소는 {window.localStorage.address}</span>) : (<span></span>)
+      }
     </div>
   );
 }
