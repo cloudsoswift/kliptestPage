@@ -108,6 +108,8 @@ function KlipTest() {
                   console.log(`[Result] ${JSON.stringify(res.data.result)}`);
                   alert(`[Result] ${JSON.stringify(res.data.result)}`);
                   window.sessionStorage.setItem('walletAddress', res.data.result.klaytn_address)
+                  alert(window.sessionStorage.getItem('walletAddress'))
+                  alert(window.sessionStorage.walletAddress)
                   clearInterval(timerId);
                 }
               });
